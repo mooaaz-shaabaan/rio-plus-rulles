@@ -173,11 +173,3 @@ Choose a third camera viewpoint and a composition clearly distinct from BOTH stu
 
 For example, a clothing rack should stand in a bright bedroom dressing corner, holding a few neatly spaced white and light-grey garments on simple hangers, with a small white storage basket and plain white shoes on its lower shelf. Keep its rails, frame, and feet clearly visible. A self-stirring mug can sit on a clean white desk with coffee visibly swirling inside it, beside a simple notebook and pen. For other products, choose equally practical props and placement suited to their actual use.
 ```
-
-## نصائح
-
-- ابدأ محادثة جديدة للصور لكل منتج.
-- غيّر مقاس الصور إلى 2048 × 2048 واحفظها بصيغة JPG قبل رفعها؛ قد يصل حجم كل صورة أصلية إلى 10 ميجابايت، مما يؤدي إلى بطء المتجر بدرجة كبيرة.
-- ارفع الصور إلى Shopify مجمّعة حسب اللون، مع وضع صورة الاستوديو أولًا، وألصق كل سطر من النص البديل في الصورة المخصّصة له.
-- اسم اللون داخل النص البديل هو ما يجعل المتجر يعرض صور ذلك اللون فقط عندما يختار المتسوّق عينة اللون. إذا كان الاسم غائبًا أو مكتوبًا بشكل يختلف عن اسم اللون في خيارات المنتج، فستظهر كل الصور مع كل لون.
-- إذا بدأ شكل المنتج يتغيّر، اكتب "redo" أو ابدأ محادثة جديدة وأرفق الصورة مرة أخرى.
