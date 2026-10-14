@@ -1,13 +1,13 @@
-# Rio Plus — Product Prompts
+# ريو بلس — برومبتات المنتجات
 
-Two separate prompts, each used in its own new chat.
+برومبتان منفصلان، يُستخدم كل منهما في محادثة جديدة مستقلة.
 
-- **Prompt 1 (listing):** send it alone. The model replies that it's ready, then asks for the product details one at a time, and returns every Shopify field in English and Arabic.
-- **Prompt 2 (images):** send it alone in a new chat. The model asks for the product photo, then creates 3 images per color variant, one at a time, and gives the alt text for each color.
+- **البرومبت الأول (بيانات المنتج):** أرسله بمفرده. يرد النموذج بأنه جاهز، ثم يطلب تفاصيل المنتج سؤالًا واحدًا في كل مرة، ويقدّم جميع حقول Shopify بالإنجليزية والعربية.
+- **البرومبت الثاني (الصور):** أرسله بمفرده في محادثة جديدة. يطلب النموذج صورة المنتج، ثم يُنشئ 3 صور لكل لون، صورة واحدة في كل مرة، ويقدّم النص البديل لكل لون.
 
 ---
 
-## Prompt 1 — Product listing
+## البرومبت الأول — بيانات المنتج
 
 ```
 You are the product copywriter for RIO+ (Rio Plus Egypt, riopluseg.com), an Egyptian lifestyle store selling home, kitchen, travel, kids and summer products. Your job is to write product listings that match the existing catalog EXACTLY.
@@ -94,7 +94,7 @@ WEIGHT
 
 ---
 
-## Prompt 2 — Product images (new chat)
+## البرومبت الثاني — صور المنتج (محادثة جديدة)
 
 ```
 You are the product photographer for RIO+ (Rio Plus Egypt), an Egyptian lifestyle store. Create a consistent set of 3 separate photos for EACH real product COLOR VARIANT shown in my reference photos: two clean studio views and one realistic photo showing that color variant in everyday use.
@@ -174,10 +174,10 @@ Choose a third camera viewpoint and a composition clearly distinct from BOTH stu
 For example, a clothing rack should stand in a bright bedroom dressing corner, holding a few neatly spaced white and light-grey garments on simple hangers, with a small white storage basket and plain white shoes on its lower shelf. Keep its rails, frame, and feet clearly visible. A self-stirring mug can sit on a clean white desk with coffee visibly swirling inside it, beside a simple notebook and pen. For other products, choose equally practical props and placement suited to their actual use.
 ```
 
-## Tips
+## نصائح
 
-- One new image chat per product.
-- Resize the images to 2048 × 2048 and save as JPG before uploading; the raw output can be 10 MB each and will slow the store badly.
-- Upload them to Shopify grouped by color, studio shot first, and paste each line of alt text onto its photo.
-- The color name inside the alt text is what makes the store show only that color's photos when a shopper picks a swatch. If it is missing or spelled differently from the variant, all photos show for every color.
-- If the product starts changing shape, write "redo" or start a new chat and re-attach the photo.
+- ابدأ محادثة جديدة للصور لكل منتج.
+- غيّر مقاس الصور إلى 2048 × 2048 واحفظها بصيغة JPG قبل رفعها؛ قد يصل حجم كل صورة أصلية إلى 10 ميجابايت، مما يؤدي إلى بطء المتجر بدرجة كبيرة.
+- ارفع الصور إلى Shopify مجمّعة حسب اللون، مع وضع صورة الاستوديو أولًا، وألصق كل سطر من النص البديل في الصورة المخصّصة له.
+- اسم اللون داخل النص البديل هو ما يجعل المتجر يعرض صور ذلك اللون فقط عندما يختار المتسوّق عينة اللون. إذا كان الاسم غائبًا أو مكتوبًا بشكل يختلف عن اسم اللون في خيارات المنتج، فستظهر كل الصور مع كل لون.
+- إذا بدأ شكل المنتج يتغيّر، اكتب "redo" أو ابدأ محادثة جديدة وأرفق الصورة مرة أخرى.
