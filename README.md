@@ -47,6 +47,7 @@ TITLE (English): RIO+ [Product Name] — [Key spec]
 - Title Case, one em dash with a space on each side.
 - Key spec = size, capacity, dimensions or color, whichever matters most to the buyer.
 - Examples: "RIO+ Vacuum Bottle — 150 ml / 250 ml", "RIO+ Clothes Rack with Shelf — 110 × 150 cm", "RIO+ Self-Stirring Mug — Red & White".
+- If the product has size variants, the title must not name a single size.
 
 DESCRIPTION (English, HTML, exactly this structure, nothing else):
 <p>[1–2 sentences. Start with the benefit to the customer and mention "the RIO+ [Product Name]".]</p><h3>Highlights</h3><ul><li>[fact]</li><li>[fact]</li><li>[fact]</li><li>[fact]</li></ul><p>[One short care, safety or usage note.]</p>
@@ -54,13 +55,28 @@ DESCRIPTION (English, HTML, exactly this structure, nothing else):
 
 PRODUCT TYPE: singular noun phrase in Title Case (e.g. "Insulated Tumbler", "Portable Blender").
 
+VARIANT OPTIONS: list the product options exactly as they must be created in Shopify.
+- If the product has colours, the FIRST option must be named exactly "Color" (not "Colour",
+  not "Colors", not a translated name). The store matches photos to the selected colour by
+  the first option, so a different name or position breaks the photo filtering.
+- A size option, if any, comes second and is named exactly "Size".
+- Three options maximum.
+- An attribute with only one possible value is NOT an option. Put it in CATEGORY METAFIELDS
+  or the description instead, so the product page does not show a picker with one choice.
+- Write colour values as simple English colour names in Title Case (Black, Pink, Navy,
+  Beige). Do not translate them here; the Arabic names are handled once in the store's
+  colour settings, not per product.
+- Output one line per option as "Option name: value, value, value".
+- If the product has no variants, output "VARIANT OPTIONS: none".
+
 TAGS: lowercase, comma-separated. Pick from this list (each one places the product in a store collection), then add 1–3 descriptive tags (e.g. gym, kids, school, office):
 - summer → Summer Collection
 - smart gadget / home gadget / home appliance / electric pump → Smart Gadgets
 - travel → Outdoor & Travel
 - kitchen / home comfort / drinkware → Everyday Essentials
 - new → New Arrivals (for newly added products)
-- sale → Offers and Best Sellers (ONLY if there is a compare-at price)
+- sale → Offers and Best Sellers (only when I confirm this product is in an actual,
+  time-limited promotion — not merely because a compare-at price exists)
 
 URL HANDLE: rio-[short-name]-[spec], lowercase, hyphens only, English only.
 
@@ -74,9 +90,19 @@ ARABIC SEO TITLE: [Arabic title] | ريو بلس مصر
 ARABIC SEO DESCRIPTION: max 155 characters, ending with "الدفع عند الاستلام في جميع أنحاء مصر."
 
 VENDOR: always "Rio Plus".
-CATEGORY: the most specific matching category from the Shopify Standard Product Taxonomy, written as "[Category] in [Parent category]" (e.g. "School Backpacks in Backpacks", "Water Bottles in Food & Beverage Carriers").
+CATEGORY: a category from the Shopify Standard Product Taxonomy, written as
+"[Category] in [Parent category]" (e.g. "School Backpacks in Backpacks",
+"Water Bottles in Food & Beverage Carriers"). Choose the most specific category
+that still carries the attributes this product needs. If the product has colour
+variants, the category MUST support the Color attribute; when the most specific
+category does not, move up to the nearest parent that does — for example
+"Food Blenders in Blenders" rather than "Personal Blenders", and
+"Thermoses in Food & Beverage Carriers" rather than "Travel Mugs". Add one line
+naming the category you chose, and why, if you moved up from a narrower one.
 CATEGORY METAFIELDS: only the ones supported by facts, one per line as "Field: value" (e.g. "Color: Blue", "Material: Stainless steel", "Care instructions: Hand wash"). Skip anything unknown.
-WEIGHT: in grams, from my answer; write "unknown" if I didn't give it.
+WEIGHT: in grams, from my answer; write "unknown" if I didn't give it. If the weight is
+unknown, still output "WEIGHT: unknown" and add one line after the listing: "Weight missing
+— shipping rates that charge by weight will be wrong until this is filled in."
 
 HTML RULE: write DESCRIPTION HTML and ARABIC DESCRIPTION HTML as raw HTML code on a single line, each inside its own code block, never as rendered text or Markdown. The Arabic HTML uses exactly the same tags as the English HTML (<p>, <h3>, <ul>, <li>), with no dir or style attributes.
 
@@ -85,6 +111,7 @@ Each label on its own line, followed by the value, no extra commentary within th
 TITLE
 DESCRIPTION HTML
 PRODUCT TYPE
+VARIANT OPTIONS
 TAGS
 URL HANDLE
 SEO TITLE
@@ -141,7 +168,8 @@ Create a consistent set of 3 separate photos for EACH real product COLOR VARIANT
 - Output 6 lines inside ONE code block: 3 English lines, then 3 Arabic lines, one per shot in order (1 hero studio, 2 alternative studio view, 3 everyday use).
 - English format: RIO+ [Product Name] [short shot description] — [Color]
 - Arabic format: [اسم المنتج بالعربية] RIO+ [وصف قصير للقطة] — [Color]
-- The COLOR NAME MUST APPEAR IN EVERY ONE OF THE 6 LINES, written in English and spelled exactly as I named the color (for example Black, Pink, Red), even in the Arabic lines. This is required: the store filters which photos a shopper sees by matching the color name inside the alt text, so a missing or differently spelled color name breaks it.
+- The COLOR NAME MUST APPEAR IN EVERY ONE OF THE 6 LINES, written in English and spelled exactly as it appears in VARIANT OPTIONS (for example Black, Pink, Red), even in the Arabic lines. This is required: the store filters which photos a shopper sees by matching the color name inside the alt text, so a missing or differently spelled color name breaks it.
+- Never write another colour's name, or any word containing it, in a line that belongs to a different colour. A Pink line that mentions "greenery" will also be matched to Green.
 - Describe what the photo actually shows, not the product's marketing benefits.
 - Each line under 125 characters. No emojis, no quotation marks, no file names, no numbering.
 
@@ -198,3 +226,17 @@ For example, a clothing rack should stand in a bright bedroom dressing corner, h
 - ارفع الصور إلى Shopify مجمّعة حسب اللون، مع وضع صورة الاستوديو أولًا، وألصق كل سطر من النص البديل في الصورة المخصّصة له.
 - اكتب اسم اللون في النص البديل بالإنجليزية وبنفس تهجئة اسم اللون في خيارات المنتج، حتى يستمر ربط الصور باللون وفق إعداد المتجر الحالي.
 - إذا تغيّر شكل المنتج، اكتب "redo" وحدّد التصحيح، وأعد إرفاق الصورة الأصلية عند الحاجة.
+
+## قواعد المتجر التي يحميها هذا البرومبت
+
+هذه ليست تفضيلات شكلية، بل الإعدادات التي تعتمد عليها صفحة المنتج فعليًا:
+
+| القاعدة | ما الذي يتعطّل عند مخالفتها |
+|---|---|
+| اسم الخيار الأول `Color` بالحرف | فلترة الصور حسب اللون تتوقف، ويرى العميل صور كل الألوان معًا |
+| ترتيب `Color` أولًا ثم `Size` | المتجر يقرأ الخيار الأول، فيبحث عن المقاس في النص البديل ولا يجده |
+| اسم اللون داخل النص البديل بالإنجليزية | الصور لا ترتبط باللون، والدائرة الاحتياطية لا تجد صورة |
+| كاتيجوري تدعم خاصية Color | دوائر الألوان الأصلية في Shopify لا تظهر، وفلاتر الألوان في المجموعات تتعطّل |
+| خيار بقيمة واحدة لا يُعدّ خيارًا | تظهر في صفحة المنتج قائمة اختيار من خيار واحد، بلا فائدة |
+
+أسماء الألوان تُترجم مرة واحدة في إعدادات الألوان بالمتجر (الميتاأوبجكتس)، وليس داخل كل منتج. لذلك تبقى القيم بالإنجليزية هنا دائمًا.
