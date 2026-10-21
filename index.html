@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#06111e">
+    <title>RIO+ | رحلة تطوير المتجر</title>
+    <meta name="description"
+        content="عرض تفاعلي شامل لأعمال تطوير متجر RIO+ — من الدراسة والتخطيط إلى تحسين تجربة التسوق.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #06111e;
+            --bg2: #0c1c2e;
+            --panel: #10243a;
+            --white: #edf8ff;
+            --muted: #a2b8c9;
+            --cyan: #48d8ed;
+            --blue: #14345c;
+            --line: rgba(160, 211, 235, .16);
+            --radius: 24px
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 92px
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--white);
+            font-family: Cairo, system-ui, sans-serif;
+            line-height: 1.9;
+            overflow-x: hidden
+        }
+
+        body:before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .35;
+            background: radial-gradient(circle at 12% 22%, #12577555, transparent 37%), radial-gradient(circle at 80% 75%, #133c7755, transparent 42%);
+            z-index: -1
+        }
+
+        button,
+        a {
+            font: inherit
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid var(--cyan);
+            outline-offset: 3px
+        }
+
+        .container {
+            width: min(1180px, calc(100% - 40px));
+            margin: auto
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            inset-inline: 0;
+            z-index: 50;
+            background: #06111edb;
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--line)
+        }
+
+        .nav {
+            min-height: 73px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px
+        }
+
+        .brand {
+            font-size: 27px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1
+        }
+
+        .brand span {
+            color: var(--cyan)
+        }
+
+        .navlinks {
+            display: flex;
+            align-items: center;
+            gap: 18px
+        }
+
+        .navlinks a {
+            color: #c5d6e2;
+            font-size: 13px;
+            font-weight: 700
+        }
+
+        .navlinks a:hover {
+            color: var(--cyan)
+        }
+
+        .btn {
+            border: 1px solid var(--line);
+            border-radius: 99px;
+            padding: 10px 20px;
+            color: white;
+            background: #ffffff0b;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: .25s
+        }
+
+        .btn:hover {
+            border-color: var(--cyan);
+            transform: translateY(-2px)
+        }
+
+        .btn.primary {
+            background: linear-gradient(120deg, #22bbd8, #57e5e4);
+            color: #062034;
+            border: 0;
+            box-shadow: 0 12px 35px #04c6de33
+        }
+
+        .progress {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 2px;
+            width: 0;
+            background: var(--cyan)
+        }
+
+        .hero {
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 140px 0 90px
+        }
+
+        .hero:before {
+            content: "";
+            position: absolute;
+            left: -220px;
+            top: 18%;
+            width: 670px;
+            height: 670px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #19c9e42e, transparent 62%);
+            filter: blur(10px)
+        }
+
+        .hero:after {
+            content: "";
+            position: absolute;
+            left: 10%;
+            top: 17%;
+            width: 480px;
+            height: 480px;
+            border: 1px solid #6ce4fa19;
+            border-radius: 50%;
+            box-shadow: 0 0 0 85px #6ce4fa08, 0 0 0 170px #6ce4fa04;
+            pointer-events: none
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            border: 1px solid #5ddceb48;
+            border-radius: 99px;
+            padding: 4px 17px;
+            color: var(--cyan);
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .5px;
+            background: #22c7d010
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 18px var(--cyan)
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 116px);
+            line-height: 1.3;
+            letter-spacing: -3px;
+            margin: 20px 0 14px;
+            font-weight: 900
+        }
+
+        .accent {
+            color: var(--cyan)
+        }
+
+        .hero .lead {
+            font-size: clamp(16px, 2vw, 23px);
+            color: #d8e9f5;
+            font-weight: 700;
+            max-width: 760px;
+            margin: 0 0 12px
+        }
+
+        .hero .sub {
+            font-size: 15px;
+            max-width: 640px;
+            color: var(--muted);
+            margin: 0 0 32px
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .hero-mark {
+            position: absolute;
+            left: 6%;
+            top: 45%;
+            font-size: clamp(140px, 24vw, 360px);
+            font-weight: 900;
+            letter-spacing: -30px;
+            opacity: .055;
+            transform: translateY(-50%);
+            pointer-events: none
+        }
+
+        .section {
+            padding: 100px 0
+        }
+
+        .section-head {
+            max-width: 800px;
+            margin-bottom: 35px
+        }
+
+        .kicker {
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: var(--cyan)
+        }
+
+        h2 {
+            font-size: clamp(30px, 4.4vw, 52px);
+            line-height: 1.5;
+            margin: 6px 0 12px;
+            font-weight: 900;
+            letter-spacing: -1px
+        }
+
+        .section-head p {
+            color: var(--muted);
+            font-size: 15px;
+            margin: 0
+        }
+
+        .grid {
+            display: grid;
+            gap: 16px
+        }
+
+        .stats {
+            grid-template-columns: repeat(4, 1fr)
+        }
+
+        .stat,
+        .panel,
+        .chapter,
+        .quote {
+            border: 1px solid var(--line);
+            background: linear-gradient(145deg, #16304c94, #0b1e31cc);
+            border-radius: var(--radius)
+        }
+
+        .stat {
+            padding: 26px 20px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .stat strong {
+            display: block;
+            color: var(--cyan);
+            font-size: clamp(37px, 5vw, 65px);
+            line-height: 1.3;
+            direction: ltr;
+            text-align: right;
+            font-weight: 900
+        }
+
+        .stat span {
+            font-size: 13px;
+            color: #b9cfe0;
+            font-weight: 700
+        }
+
+        .stat:after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #52e3f912;
+            border-radius: 50%;
+            left: -35px;
+            top: -35px
+        }
+
+        .journey {
+            padding-top: 0
+        }
+
+        .chapter-grid {
+            grid-template-columns: repeat(3, 1fr)
+        }
+
+        .chapter {
+            padding: 25px;
+            transition: .25s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 230px
+        }
+
+        .chapter:hover {
+            transform: translateY(-5px);
+            border-color: #45d8e77d;
+            background: linear-gradient(150deg, #193d5a, #0c2235)
+        }
+
+        .chapter .index {
+            font-size: 12px;
+            color: var(--cyan);
+            font-weight: 900
+        }
+
+        .chapter h3 {
+            font-size: 20px;
+            line-height: 1.6;
+            margin: 9px 0 9px
+        }
+
+        .chapter p {
+            color: var(--muted);
+            font-size: 13px;
+            margin: 0;
+            flex: 1
+        }
+
+        .chapter .arrow {
+            margin-top: 18px;
+            font-size: 12px;
+            color: var(--cyan);
+            font-weight: 800
+        }
+
+        .feature {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            align-items: center
+        }
+
+        .panel {
+            padding: 34px
+        }
+
+        .feature h3 {
+            font-size: 29px;
+            line-height: 1.5;
+            margin: 0 0 12px
+        }
+
+        .feature p,
+        .feature li {
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .feature ul {
+            padding-right: 20px
+        }
+
+        .visual {
+            min-height: 350px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 40% 35%, #1d668775, #0c1f33 55%);
+            overflow: hidden
+        }
+
+        .screen {
+            background: #061320;
+            border: 1px solid #68deed52;
+            border-radius: 17px;
+            width: min(340px, 90%);
+            padding: 15px;
+            box-shadow: 0 30px 70px #0006;
+            transform: rotate(-4deg)
+        }
+
+        .screen-top {
+            height: 9px;
+            width: 55px;
+            border-radius: 8px;
+            background: #274c61;
+            margin-bottom: 15px
+        }
+
+        .screen-line {
+            height: 13px;
+            background: #254c62;
+            border-radius: 7px;
+            margin: 13px 0
+        }
+
+        .screen-line.short {
+            width: 63%
+        }
+
+        .screen-pill {
+            height: 50px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #117b9f, #42d8e4);
+            margin: 17px 0
+        }
+
+        .orbit {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border: 1px dashed #5ddde945;
+            border-radius: 50%;
+            animation: spin 45s linear infinite
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .detail-section {
+            padding: 70px 0
+        }
+
+        .detail-heading {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 23px
+        }
+
+        .num {
+            border: 1px solid #48d8ed65;
+            color: var(--cyan);
+            width: 55px;
+            height: 55px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            font-weight: 900
+        }
+
+        .detail-heading h2 {
+            font-size: clamp(25px, 3vw, 34px);
+            margin: 0
+        }
+
+        .detail-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 13px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            counter-reset: point
+        }
+
+        .detail-list li {
+            counter-increment: point;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            border: 1px solid var(--line);
+            background: #0e2135ac;
+            padding: 19px 21px;
+            border-radius: 16px;
+            font-size: 14px;
+            color: #cbdae6;
+            transition: border-color .2s
+        }
+
+        .detail-list li:hover {
+            border-color: #49d7e47b
+        }
+
+        .detail-list li:before {
+            content: counter(point, decimal-leading-zero);
+            color: var(--cyan);
+            font-weight: 900;
+            font-size: 12px;
+            min-width: 23px
+        }
+
+        .detail-list strong {
+            color: white
+        }
+
+        .quote {
+            padding: 45px;
+            text-align: center
+        }
+
+        .quote p {
+            font-size: clamp(18px, 2.5vw, 28px);
+            font-weight: 800;
+            line-height: 1.9;
+            margin: 0
+        }
+
+        .quote small {
+            display: block;
+            color: var(--muted);
+            margin-top: 16px
+        }
+
+        .end {
+            padding: 95px 0;
+            text-align: center;
+            background: linear-gradient(180deg, transparent, #0c2541 90%)
+        }
+
+        .end h2 {
+            font-size: clamp(38px, 6vw, 70px)
+        }
+
+        .end p {
+            color: var(--muted);
+            max-width: 640px;
+            margin: 10px auto 30px
+        }
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 22px 0;
+            color: #93b0c1;
+            font-size: 12px
+        }
+
+        .footinner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px
+        }
+
+        .floating {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            z-index: 20;
+            display: flex;
+            gap: 8px
+        }
+
+        .floating button {
+            width: 45px;
+            height: 45px;
+            border: 1px solid #5fd7ed66;
+            background: #102d43e8;
+            color: white;
+            border-radius: 50%;
+            font-size: 20px;
+            backdrop-filter: blur(12px)
+        }
+
+        .floating button:hover {
+            background: #136b84
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity .7s, transform .7s
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none
+        }
+
+        .menu-btn {
+            display: none
+        }
+
+        .print-only {
+            display: none
+        }
+
+        @media(max-width:950px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .chapter-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .feature {
+                grid-template-columns: 1fr
+            }
+
+            .visual {
+                min-height: 260px
+            }
+
+            .navlinks {
+                gap: 10px
+            }
+
+            .navlinks a {
+                font-size: 11px
+            }
+        }
+
+        @media(max-width:650px) {
+            .container {
+                width: min(100% - 28px, 1180px)
+            }
+
+            .section {
+                padding: 65px 0
+            }
+
+            .hero {
+                min-height: 88svh;
+                padding: 130px 0 65px
+            }
+
+            .hero h1 {
+                letter-spacing: -1px
+            }
+
+            .chapter-grid,
+            .detail-list {
+                grid-template-columns: 1fr
+            }
+
+            .chapter {
+                min-height: auto
+            }
+
+            .panel {
+                padding: 24px
+            }
+
+            .quote {
+                padding: 28px 18px
+            }
+
+            .navlinks {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: #071624;
+                padding: 18px 20px;
+                flex-direction: column;
+                align-items: stretch;
+                border-bottom: 1px solid var(--line)
+            }
+
+            .navlinks.open {
+                display: flex
+            }
+
+            .navlinks a {
+                font-size: 14px
+            }
+
+            .menu-btn {
+                display: inline-flex
+            }
+
+            .topbar .btn.primary {
+                padding: 8px 13px;
+                font-size: 11px
+            }
+
+            .floating {
+                bottom: 14px;
+                left: 14px
+            }
+
+            .stat {
+                padding: 20px 15px
+            }
+
+            .stat span {
+                font-size: 11px
+            }
+
+            .detail-section {
+                padding: 48px 0
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *:before,
+            *:after {
+                animation: none !important;
+                scroll-behavior: auto !important;
+                transition: none !important
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: #122333
+            }
+
+            body:before,
+            .topbar,
+            .floating,
+            .actions,
+            .orbit,
+            .visual,
+            .arrow {
+                display: none !important
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 30px 0
+            }
+
+            .hero h1,
+            .accent,
+            .stat strong,
+            .kicker,
+            .num {
+                color: #136c8b
+            }
+
+            .section,
+            .detail-section {
+                padding: 22px 0;
+                break-inside: avoid
+            }
+
+            .chapter,
+            .stat,
+            .panel,
+            .quote,
+            .detail-list li {
+                background: white;
+                color: #122333;
+                border-color: #ccd9df;
+                break-inside: avoid
+            }
+
+            .chapter p,
+            .section-head p,
+            .detail-list li,
+            .quote small,
+            .end p {
+                color: #465d70
+            }
+
+            .stats {
+                grid-template-columns: repeat(4, 1fr)
+            }
+
+            .chapter-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .detail-list {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none
+            }
+
+            .end {
+                background: white;
+                padding: 30px 0
+            }
+
+            .hero-mark {
+                display: none
+            }
+
+            .print-only {
+                display: block
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="container nav"><a href="#home" class="brand" aria-label="RIO Plus">RIO<span>+</span></a>
+            <nav class="navlinks" id="navlinks" aria-label="القائمة الرئيسية"><a href="#overview">نظرة عامة</a><a
+                    href="#chapters">محاور التطوير</a><a href="#shipping">الشحن</a><a href="#arabic">التعريب</a><a
+                    href="#technical">التطوير التقني</a><a href="#closing">الخلاصة</a></nav>
+            <div style="display:flex;gap:8px"><button class="btn menu-btn" id="menuToggle" aria-label="فتح القائمة"
+                    aria-expanded="false">☰</button><button class="btn primary" onclick="window.print()">⤓ تصدير
+                    PDF</button></div>
+        </div>
+        <div class="progress" id="progress"></div>
+    </header>
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-mark" aria-hidden="true">RIO+</div>
+            <div class="container">
+                <div class="eyebrow"><span class="dot"></span>عرض توثيقي لأعمال التطوير المنفذة</div>
+                <h1>رحلة تطوير<br><span class="accent">متجر RIO+</span></h1>
+                <p class="lead">من متجر إلكتروني إلى تجربة تسوق أكثر تنظيمًا ووضوحًا واحترافية.</p>
+                <p class="sub">استعراض تفاعلي للأعمال المنفذة في المحتوى والصور والشحن والتعريب والسياسات وأكواد القالب
+                    وتجربة العميل.</p>
+                <div class="actions"><a class="btn primary" href="#overview">اكتشف الإنجازات ←</a><a class="btn"
+                        href="#chapters">استعرض المحاور التسعة ↙</a></div>
+            </div>
+        </section>
+        <!-- <section id="overview" class="section">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div class="kicker">PROJECT OVERVIEW</div>
+                    <h2>التطوير في <span class="accent">أرقام</span></h2>
+                    <p>أبرز المؤشرات الموثقة من الأعمال المنفذة — أرقام تعبّر عن نطاق التطوير، وليست ادعاءات عن زيادة
+                        المبيعات.</p>
+                </div>
+                <div class="grid stats">
+                    <div class="stat reveal"><strong data-counter="9">٩</strong><span>محاور تطوير رئيسية</span></div>
+                    <div class="stat reveal"><strong data-counter="3">٣</strong><span>مناطق للشحن</span></div>
+                    <div class="stat reveal"><strong data-counter="30">٣٠</strong><span>يومًا للإرجاع</span></div>
+                    <div class="stat reveal"><strong data-counter="10">١٠</strong><span>مواضع تم تصحيح معلومات الشحن
+                            فيها</span></div>
+                    <div class="stat reveal"><strong data-counter="6">٦</strong><span>سياسات تمت إعادة صياغتها</span>
+                    </div>
+                    <div class="stat reveal"><strong data-counter="2">٢</strong><span>لغتان لتجربة المتجر</span></div>
+                    <div class="stat reveal"><strong data-counter="29">٢٩</strong><span>محافظة ومنطقة في تقسيم
+                            الشحن</span></div>
+                    <div class="stat reveal"><strong>٣٬٠٠٠</strong><span>جنيه حد الشحن المجاني الجديد</span></div>
+                </div>
+            </div>
+        </section> -->
+        <section id="chapters" class="section journey">
+            <div class="container">
+                <div class="section-head reveal">
+                    <div class="kicker">THE DEVELOPMENT JOURNEY</div>
+                    <h2>تسعة محاور. <span class="accent">تجربة واحدة متكاملة.</span></h2>
+                    <p>اختر أي محور للانتقال مباشرة إلى تفاصيل الأعمال التي أُنجزت فيه.</p>
+                </div>
+                <div class="grid chapter-grid" id="chapterCards"></div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container feature">
+                <div class="panel reveal">
+                    <div class="kicker">CUSTOMER EXPERIENCE</div>
+                    <h3>الهدف لم يكن تغيير الشكل فقط، بل <span class="accent">تحسين الرحلة بالكامل.</span></h3>
+                    <p>من لحظة دخول العميل إلى المتجر، مرورًا باكتشاف المنتجات واختيار اللون المناسب وفهم رسوم الشحن،
+                        وصولًا إلى تأكيد الطلب واستلام إشعاراته.</p>
+                    <ul>
+                        <li>عرض أوضح للمعلومات في اللغتين</li>
+                        <li>صفحات منتجات أكثر تنظيمًا</li>
+                        <li>قوائم وعناصر تفاعل تعمل بصورة متناسقة</li>
+                        <li>سياسات وشروط أكثر وضوحًا للعميل</li>
+                    </ul>
+                </div>
+                <div class="panel visual reveal" aria-label="رسم توضيحي لواجهة متجر محسّنة">
+                    <div class="orbit"></div>
+                    <div class="screen">
+                        <div class="screen-top"></div>
+                        <div style="font-weight:900;font-size:24px">RIO<span class="accent">+</span></div>
+                        <div class="screen-line short"></div>
+                        <div class="screen-pill"></div>
+                        <div class="screen-line"></div>
+                        <div class="screen-line short"></div>
+                        <div style="display:flex;gap:8px;margin-top:18px"><span
+                                style="height:26px;width:26px;border-radius:50%;background:#18bdd9"></span><span
+                                style="height:26px;width:26px;border-radius:50%;background:#f7ced4"></span><span
+                                style="height:26px;width:26px;border-radius:50%;background:#b3c3d0"></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="details"></div>
+        <section class="section">
+            <div class="container">
+                <div class="quote reveal">
+                    <div class="kicker">THE OUTCOME</div>
+                    <p>«تطوير المتجر لا يقتصر على ما يراه العميل؛ بل يشمل أيضًا التفاصيل الفنية والتشغيلية التي تجعل
+                        تجربة الشراء أوضح وأكثر ثباتًا.»</p><small>ملخص فلسفة التطوير المنفّذ في RIO+</small>
+                </div>
+            </div>
+        </section>
+        <section id="closing" class="end">
+            <div class="container reveal">
+                <div class="eyebrow"><span class="dot"></span>RIO+ STORE DEVELOPMENT</div>
+                <h2>تطوير شامل.<br><span class="accent">تجربة أفضل.</span></h2>
+                <p>شمل المشروع تحسين الهوية البصرية ومحتوى المنتجات وتعريب المتجر، إلى جانب أنظمة الشحن والسياسات وإصلاح
+                    القالب وخيارات الشراء والتتبع التسويقي، بهدف تقديم تجربة أكثر اتساقًا واحترافية.</p>
+                <div class="actions" style="justify-content:center"><a class="btn primary" href="#home">العودة للبداية
+                        ↑</a><button class="btn" onclick="window.print()">حفظ العرض كـ PDF ⤓</button></div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container footinner"><span>RIO+ · Development Showcase</span><span>عرض للأعمال المنفذة — دون ادعاء
+                نتائج تجارية غير موثقة</span></div>
+    </footer>
+    <div class="floating"><button id="toTop" title="العودة للأعلى" aria-label="العودة للأعلى">↑</button><button
+            id="fullScreen" title="ملء الشاشة" aria-label="ملء الشاشة">⛶</button></div>
+    <script>
+        const chapters = [
+            { id: 'planning', title: 'الدراسة والتخطيط', desc: 'تحليل شامل للمتجر ووضع خطة تطوير متكاملة.', items: [`إجراء <strong>فحص شامل للمتجر</strong>، شمل جميع الصفحات والمنتجات والأقسام والسياسات والإعدادات والنسختين العربية والإنجليزية.`, `وضع <strong>خطة تطوير متكاملة</strong> لتحسين الهوية البصرية وتنظيم المحتوى وتجربة المستخدم والإعدادات التشغيلية.`] },
+            { id: 'products', title: 'المنتجات والمحتوى والصور', desc: 'توحيد الهوية البصرية وأسلوب كتابة المنتجات وصورها.', items: [`مراجعة أسماء المنتجات وإعادة صياغتها بأسلوب احترافي موحد، مع إزالة الأرقام والتسميات غير المنظمة قبل الأسماء.`, `إعادة كتابة أوصاف المنتجات باستخدام <strong>قالب ثابت ومنظم</strong> يضم الوصف والمميزات والمواصفات وتعليمات الاستخدام عند الحاجة.`, `إعادة تصميم وتعديل صور المنتجات بجودة أعلى وخلفيات احترافية مناسبة لطبيعة كل منتج.`, `توحيد أسلوب التصوير والإضاءة والخلفيات والألوان بما يتناسق مع هوية المتجر.`, `تجهيز صور متنوعة بزوايا عرض مختلفة، إضافة إلى صور واقعية توضح الاستخدام اليومي.`, `مراعاة اختلاف ألوان المنتجات ليظهر كل لون بصورته الصحيحة وتفاصيله الفعلية.`, `مراجعة بيانات المنتجات لضمان اتساق الأسماء والأوصاف والصور وعرض المعلومات في جميع الصفحات.`] },
+            { id: 'shipping', title: 'الشحن والتوصيل', desc: 'مناطق توصيل واضحة، تسعير صحيح، واختبار القواعد.', items: [`إعادة تنظيم الشحن إلى <strong>٣ مناطق</strong> بدل سعر موحد، مع تغطية <strong>٢٩ محافظة ومنطقة</strong> ضمن تقسيمات الشحن.`, `تحديد المواعيد وإظهارها قبل إتمام الطلب: <strong>القاهرة والجيزة وحلوان و٦ أكتوبر: ٣–٥ أيام عمل؛ الإسكندرية والدلتا ومدن القناة: ٤–٦ أيام؛ الصعيد والمحافظات الحدودية: ٥–٧ أيام.</strong>`, `تصحيح اسم طريقة التوصيل من «شحن مجاني» إلى «الشحن القياسي» لأن النظام كان يحصّل <strong>٩٠ جنيهًا</strong> رغم الاسم الظاهر.`, `تعديل الحد الأدنى للحصول على الشحن المجاني إلى <strong>٣٬٠٠٠ جنيه</strong>.`, `تصحيح قيمة الشحن المجاني القديمة في <strong>١٠ مواضع</strong> في النسختين، بما يشمل السياسات ووصف الصفحة الرئيسية في نتائج البحث.`, `إجراء اختبارات فعلية بعربات شراء مختلفة للتأكد من تفعيل الشحن المجاني عند الوصول للحد الصحيح.`] },
+            { id: 'policies', title: 'السياسات والمصداقية', desc: 'معلومات واضحة وشروط متسقة مع إعدادات Shopify.', items: [`تمديد فترة الإرجاع من <strong>١٤ إلى ٣٠ يومًا</strong>.`, `تحديث إعدادات الإرجاع في <strong>Shopify</strong> نفسه بعد اكتشاف بقائها مضبوطة على ١٤ يومًا رغم تغيير نص السياسة.`, `توضيح رسوم الإرجاع: <strong>١٢٠ جنيهًا للشحن و٤٪ لإعادة التخزين</strong>، مع الإعفاء في حالات التلف أو العيب أو إرسال منتج خاطئ.`, `إعادة صياغة <strong>السياسات الست</strong> بالعربية والإنجليزية وإضافة قسم ثابت لبيانات التواصل في نهاية كل سياسة.`, `تصحيح عنوان بريد إلكتروني واسم نطاق غير صحيحين منشورين في شروط الاستخدام.`, `إضافة قائمة مخصصة للسياسات داخل القائمة الرئيسية لتسهيل وصول العملاء إليها.`] },
+            { id: 'arabic', title: 'تعريب المتجر بالكامل', desc: 'ترجمة شاملة وتعديلات RTL وإصلاح مشكلات النسخة العربية.', items: [`<strong>ترجمة المتجر بالكامل إلى العربية</strong>، بما يشمل الصفحات والمحتوى والقوائم والأقسام والمنتجات وعناصر الواجهة والنصوص التي يراها العملاء.`, `تعريب أسماء المنتجات وأوصافها ومعلوماتها مع الحفاظ على اتساق أسلوب الكتابة بين النسختين.`, `ترجمة السياسات وبيانات المتجر ومعلومات التواصل والقوائم الرئيسية والفرعية.`, `تصحيح عنوان الصفحة الرئيسية في نتائج بحث Google حيث كان يظهر رابط الموقع بدل اسم المتجر وكان الوصف فارغًا.`, `إصلاح <strong>تكرار السعر مرتين</strong> تحت المنتجات في النسخة العربية بتعديل كود عرض الأسعار.`, `إصلاح تجاوز قائمة «التصفية» حدود الصفحة عند استخدام العربية بتعديل ملفات التنسيق.`, `تعريب خيارات «الفرز حسب» بإنشاء ملف قالب مخصص.`, `ترجمة أسماء الألوان عبر إعدادات الألوان المشتركة لتُطبّق الترجمة تلقائيًا على المنتجات.`, `ضبط اتجاه عرض أرقام الهواتف داخل النصوص العربية لمنع انعكاس ترتيب الأرقام.`, `مراجعة توافق الواجهة مع اتجاه الكتابة من اليمين لليسار <strong>RTL</strong> وتحسين تناسق العناصر.`] },
+            { id: 'technical', title: 'أكواد القالب وتجربة المستخدم', desc: 'إصلاح الأعطال وتطوير الواجهة وسهولة الاستخدام.', items: [`اكتشاف وإصلاح عطل بالكود الرئيسي للقالب كان يمنع فتح <strong>قائمة الموبايل</strong> ويؤثر على البحث وسلة الشراء الجانبية.`, `نقل التنسيقات المخصصة من إعدادات القالب إلى ملف التنسيقات الأساسي بعد بلوغ الحد الأقصى للأكواد داخل الإعدادات.`, `إضافة <strong>زر واتساب عائم</strong> في كل صفحات المتجر مع تخصيص التصميم والموضع.`, `إزالة عبارة «Powered by Shopify» من تذييل المتجر.`, `ضبط المسافات والمحاذاة بين زر تغيير اللغة وأيقونتي سلة الشراء والبحث.`] },
+            { id: 'purchase', title: 'صفحات المنتجات وخيارات الشراء', desc: 'اختيارات ألوان ومقاسات أسهل وأكثر ارتباطًا بصور المنتج.', items: [`تطوير عرض الألوان على هيئة <strong>دوائر Color Swatches</strong> لجميع المنتجات متعددة الألوان بغض النظر عن التصنيف.`, `ربط اختيار اللون بصور المنتج لعرض <strong>صور اللون المحدد فقط</strong> بدل كل الصور معًا.`, `ضبط الربط ليظل يعمل في النسخة العربية بعد ترجمة أسماء الألوان.`, `دمج منتجين منفصلين للزجاجة الحرارية في منتج واحد بخيارات اللون والمقاس داخل نفس الصفحة.`] },
+            { id: 'collections', title: 'الأقسام والقوائم', desc: 'تصنيفات أوضح وسهولة وصول أفضل للمنتجات.', items: [`إنشاء قسم رئيسي <strong>Home & Living</strong> وقسم فرعي <strong>Home Organization</strong> وربطهما في القائمة الرئيسية بشكل متفرع.`, `نقل ميزان الجسم إلى قسم <strong>Smart Gadgets</strong> ليتناسب مع نوع المنتج.`, `اكتشاف وتصحيح خطأ في أحد وسوم <strong>Tags</strong> كان يمنع ظهور منتج في القسم الصحيح.`] },
+            { id: 'marketing', title: 'التسويق والتتبع والإشعارات', desc: 'قياس أوضح، وعي بالملكية الفكرية، ورسائل موحدة.', items: [`مراجعة إعدادات التتبع والتأكد من عمل <strong>Meta Pixel</strong> لإعلانات Facebook وInstagram لقياس الطلبات ونتائج الحملات.`, `مراجعة المنتجات من ناحية حقوق الملكية الفكرية وتحديد المنتجات التي تحتوي على شخصيات أو تصميمات محمية مع توضيح أثرها المحتمل على الحسابات الإعلانية.`, `إعادة تصميم قوالب <strong>البريد الإلكتروني لإشعارات الطلبات</strong> بمظهر احترافي متسق مع هوية المتجر بالعربية والإنجليزية.`] }
+        ];
+        const ar = n => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+        const cardRoot = document.getElementById('chapterCards'), details = document.getElementById('details');
+        chapters.forEach((ch, i) => { cardRoot.insertAdjacentHTML('beforeend', `<a href="#${ch.id}" class="chapter reveal"><span class="index">المحور ${ar(i + 1).padStart(2, '٠')}</span><h3>${ch.title}</h3><p>${ch.desc}</p><span class="arrow">استعرض التفاصيل ↙</span></a>`); details.insertAdjacentHTML('beforeend', `<section class="detail-section" id="${ch.id}"><div class="container"><div class="detail-heading reveal"><div class="num">${ar(i + 1)}</div><h2>${ch.title}</h2></div><ol class="detail-list">${ch.items.map(item => `<li class="reveal"><span>${item}</span></li>`).join('')}</ol></div></section>`) });
+        const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target) } }), { threshold: .08 }); document.querySelectorAll('.reveal').forEach(e => observer.observe(e));
+        const bar = document.getElementById('progress'); function updateProgress() { const d = document.documentElement; bar.style.width = Math.min(100, Math.max(0, 100 * scrollY / (d.scrollHeight - innerHeight))) + '%' } addEventListener('scroll', updateProgress, { passive: true }); updateProgress(); document.getElementById('toTop').onclick = () => scrollTo({ top: 0, behavior: 'smooth' }); document.getElementById('fullScreen').onclick = () => { if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.() }; const toggle = document.getElementById('menuToggle'), navlinks = document.getElementById('navlinks'); toggle.onclick = () => { const open = navlinks.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(open)) }; navlinks.querySelectorAll('a').forEach(a => a.onclick = () => { navlinks.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false') });
+    </script>
+</body>
+
+</html>
